@@ -1,40 +1,19 @@
 from selenium import webdriver
 from selenium.webdriver.support.ui import Select
+import json
 import time
 import datetime
 
-accounts = [
-    {
-        "first_name": "Zachary",
-        "last_name": "Lindner",
-        "email": "zlindner@uoguelph.ca",
-        "times": ["12:00", "12:30", "1:00", "1:30", "2:00", "2:30"]
-    },
-    {
-        "first_name": "Meghan",
-        "last_name": "McLeod",
-        "email": "mmcleo07@uoguelph.ca",
-        "times": ["3:00", "3:30", "4:00", "4:30", "5:00", "5:30"]
-    },
-    {
-        "first_name": "Alexandra",
-        "last_name": "Ramsey",
-        "email": "aramsey@uoguelph.ca",
-        "times": ["6:00", "6:30", "7:00", "7:30", "8:00", "8:30"]
-    },
-    {
-        "first_name": "Hamad",
-        "last_name": "Ahmed",
-        "email": "hamad@uoguelph.ca",
-        "times": ["9:00", "9:30", "10:00", "10:30", "11:00", "11:30"]
-    }
-]
+f = open("accounts.json")
+json_data = json.load(f)
+
+f.close()
 
 tomorrow = datetime.date.today() + datetime.timedelta(days=1)
 
 browser = webdriver.Chrome()
 
-for account in accounts:
+for account in json_data:
     browser.get("https://cal.lib.uoguelph.ca/reserve/5-person-study-rooms")
 
     for i in range(6):
